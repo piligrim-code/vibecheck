@@ -1,0 +1,5 @@
+CREATE OR REPLACE TRIGGER count_vibe_trigger
+AFTER INSERT ON vibecheck
+FOR EACH STATEMENT
+EXECUTE FUNCTION count_vibe();
+

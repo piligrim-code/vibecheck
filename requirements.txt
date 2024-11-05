@@ -1,0 +1,7 @@
+flask~=3.0.3
+openai~=1.41.0
+python-dotenv~=1.0.1
+DateTime~=5.5
+pyTelegramBotAPI
+pandas~=2.2.2
+boto3~=1.35.0

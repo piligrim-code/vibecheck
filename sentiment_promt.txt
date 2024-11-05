@@ -1,0 +1,541 @@
+Your task is to evaluate the sentiment of the given message and assign a sentiment score between -1.00 and 1.00.
+
+Scoring Guidelines:
+
+1.00 indicates a very positive, respectful and without insultivness.
+-1.00 indicates a highly negative, insultive that might use profanity language.
+Scores should be assigned in increments of 0.01.
+Focus on maintaining healthy and respectful conversations.
+Discourage profanity, hate speech, racism, or any form of fighting, disrespect, and disrespectful arguing.
+Obscene language is allowed if it doesn’t insult anybody.
+
+Avoid assigning neutral scores like 0.00 unless absolutely necessary. It is preferable to assign scores that reflect a slight positive or negative sentiment, even if the sentiment is mild.
+
+
+Note: The messages will primarily be in Russian and come from Telegram.
+
+Examples:
+
+Example 1:
+Message: “Отличная работа! Так держать!”
+Explanation: This is a highly positive and encouraging message, showing appreciation.
+Answer: 1.00
+
+Example 2:
+Message: “Спасибо за вашу помощь сегодня!”
+Explanation: This is a strong expression of gratitude and appreciation.
+Answer: 0.98
+
+Example 3:
+Message: “Вы превзошли все ожидания!”
+Explanation: This is an expression of great satisfaction and praise.
+Answer: 0.96
+
+Example 4:
+Message: “Я действительно ценю вашу поддержку.”
+Explanation: This message expresses sincere gratitude and appreciation.
+Answer: 0.94
+
+Example 5:
+Message: “Отличные идеи на встрече!”
+Explanation: This message shows high appreciation for the ideas shared during a meeting.
+Answer: 0.92
+
+Example 6:
+Message: “Вы сделали это быстрее, чем я ожидал.”
+Explanation: This message acknowledges promptness and exceeds expectations.
+Answer: 0.90
+
+Example 7:
+Message: “Ваш вклад действительно помогает проекту.”
+Explanation: This message acknowledges the positive impact of someone's contribution to a project.
+Answer: 0.88
+
+Example 8:
+Message: “Хорошая работа, команда.”
+Explanation: This is an expression of appreciation directed towards the entire team.
+Answer: 0.86
+
+Example 9:
+Message: “Спасибо за отличное объяснение.”
+Explanation: This message shows gratitude for a clear and helpful explanation.
+Answer: 0.84
+
+Example 10:
+Message: “Все идет по плану.”
+Explanation: This message is neutral to mildly positive, indicating that everything is proceeding as expected.
+Answer: 0.82
+
+Example 11:
+Message: “Согласен с вашим предложением.”
+Explanation: This is a straightforward agreement, reflecting a positive sentiment.
+Answer: 0.80
+
+Example 12:
+Message: “Мы в графике, продолжайте в том же духе.”
+Explanation: This message praises the current progress and encourages continued effort.
+Answer: 0.78
+
+Example 13:
+Message: “Эти данные выглядят полезными.”
+Explanation: This message is mildly positive, appreciating the usefulness of the data.
+Answer: 0.76
+
+Example 14:
+Message: “Давайте обсудим это на следующей встрече.”
+Explanation: This message is neutral, suggesting further discussion.
+Answer: 0.74
+
+Example 15:
+Message: “Мне нужно немного времени, чтобы разобраться с этим.”
+Explanation: This message is neutral, indicating the need for more time.
+Answer: 0.72
+
+Example 16:
+Message: “Есть некоторые вопросы по вашему отчету.”
+Explanation: This message is neutral to slightly negative, indicating that there are some issues with the report.
+Answer: 0.70
+
+Example 17:
+Message: “Пожалуйста, уделите больше внимания деталям.”
+Explanation: This message is slightly negative, suggesting the need for more attention to details.
+Answer: 0.68
+
+Example 18:
+Message: “Немного отстаем от графика, нужно ускориться.”
+Explanation: This message is slightly negative, acknowledging a delay and urging to speed up.
+Answer: 0.66
+
+Example 19:
+Message: “Я не совсем понял вашу последнюю мысль.”
+Explanation: This message is neutral, indicating a need for clarification.
+Answer: 0.64
+
+Example 20:
+Message: “Можете переформулировать свой комментарий?”
+Explanation: This message is neutral, asking for rephrasing or clarification.
+Answer: 0.62
+
+Example 21:
+Message: “Давайте попробуем другой подход.”
+Explanation: This message is neutral to slightly positive, suggesting an alternative approach.
+Answer: 0.60
+
+Example 22:
+Message: “Мне не совсем нравится это решение, но давайте попробуем.”
+Explanation: This message is neutral to slightly negative, expressing doubt but still willing to try.
+Answer: 0.58
+
+Example 23:
+Message: “Можно было бы сделать это лучше.”
+Explanation: This message is slightly negative, suggesting that the outcome could have been better.
+Answer: 0.56
+
+Example 24:
+Message: “У нас возникли некоторые трудности с вашим предложением.”
+Explanation: This message is slightly negative, indicating difficulties with a proposal.
+Answer: 0.54
+
+Example 25:
+Message: “Я не согласен с вашим методом.”
+Explanation: This message is negative, expressing disagreement.
+Answer: 0.52
+
+Example 26:
+Message: “Мы не можем себе позволить такие ошибки.”
+Explanation: This message is negative, indicating that errors are unacceptable.
+Answer: 0.50
+
+Example 27:
+Message: “Это не то, чего мы ожидали.”
+Explanation: This message is negative, indicating disappointment.
+Answer: 0.48
+
+Example 28:
+Message: “Пожалуйста, проверьте ваши данные еще раз.”
+Explanation: This message is neutral to slightly negative, requesting a re-check of the data.
+Answer: 0.46
+
+Example 29:
+Message: “Этот отчет неполный.”
+Explanation: This message is negative, indicating that the report is incomplete.
+Answer: 0.44
+
+Example 30:
+Message: “Вы упустили важную деталь.”
+Explanation: This message is negative, indicating that an important detail was missed.
+Answer: 0.42
+
+Example 31:
+Message: “Это не соответствует нашим стандартам.”
+Explanation: This message is negative, indicating that something does not meet the expected standards.
+Answer: 0.40
+
+Example 32:
+Message: “Нужно было бы закончить это раньше.”
+Explanation: This message is negative, suggesting that the task should have been completed earlier.
+Answer: 0.38
+
+Example 33:
+Message: “У нас слишком много ошибок в этом проекте.”
+Explanation: This message is negative, indicating that there are too many mistakes in the project.
+Answer: 0.36
+
+Example 34:
+Message: “Это не оправдывает наши ожидания.”
+Explanation: This message is negative, indicating that expectations were not met.
+Answer: 0.34
+
+Example 35:
+Message: “Вы сделали работу недостаточно качественно.”
+Explanation: This message is negative, indicating poor quality work.
+Answer: 0.32
+
+Example 36:
+Message: “Это не тот уровень, который мы ожидаем.”
+Explanation: This message is negative, indicating that the outcome does not meet expectations.
+Answer: 0.30
+
+Example 37:
+Message: “Такое количество ошибок недопустимо.”
+Explanation: This message is negative, indicating that the number of errors is unacceptable.
+Answer: 0.28
+
+Example 38:
+Message: “Это слабое исполнение.”
+Explanation: This message is negative, indicating poor execution.
+Answer: 0.26
+
+Example 39:
+Message: “Я разочарован результатами.”
+Explanation: This message is negative, indicating disappointment with the results.
+Answer: 0.24
+
+Example 40:
+Message: “Вы должны исправить это немедленно.”
+Explanation: This message is negative, indicating urgency to correct a mistake.
+Answer: 0.22
+
+Example 41:
+Message: “Это полный провал.”
+Explanation: This message is highly negative, indicating total failure.
+Answer: 0.20
+
+Example 42:
+Message: “Ваш подход был неверным с самого начала.”
+Explanation: This message is highly negative, criticizing the approach from the start.
+Answer: 0.18
+
+Example 43:
+Message: “Это неприемлемо.”
+Explanation: This message is highly negative, indicating something is unacceptable.
+Answer: 0.16
+
+Example 44:
+Message: “Вы не справились с задачей.”
+Explanation: This message is highly negative, indicating failure to accomplish the task.
+Answer: 0.14
+
+Example 45:
+Message: “Ваши действия привели к большим проблемам.”
+Explanation: This message is highly negative, indicating that actions caused significant problems.
+Answer: 0.12
+
+Example 46:
+Message: “Вы постоянно совершаете ошибки.”
+Explanation: This message is highly negative, criticizing repeated mistakes.
+Answer: 0.10
+
+Example 47:
+Message: “Это просто ужасно.”
+Explanation: This message is highly negative, indicating something is very bad.
+Answer: 0.08
+
+Example 48:
+Message: “Ваши ошибки вредят всей команде.”
+Explanation: This message is highly negative, indicating that mistakes are affecting the entire team.
+Answer: 0.06
+
+Example 49:
+Message: “Я не могу больше это терпеть.”
+Explanation: This message is highly negative, indicating frustration and the limit of patience.
+Answer: 0.04
+
+Example 50:
+Message: “Это просто не оправдывает ожиданий.”
+Explanation: This message is slightly negative, indicating that expectations were not met.
+Answer: 0.02
+
+Example 51:
+Message: “Я разочарован тем, как это было сделано.”
+Explanation: This message is neutral, but leans slightly negative, expressing disappointment in execution.
+Answer: 0.00
+
+Example 52:
+Message: “Мы серьезно отклонились от плана.”
+Explanation: This message is negative, indicating a serious deviation from the plan.
+Answer: -0.02
+
+Example 53:
+Message: “Эти результаты нас подводят.”
+Explanation: This message is negative, indicating that results are disappointing.
+Answer: -0.04
+
+Example 54:
+Message: “Ваши действия усложняют ситуацию.”
+Explanation: This message is negative, indicating that actions are complicating the situation.
+Answer: -0.06
+
+Example 55:
+Message: “Мы снова застряли из-за ваших ошибок.”
+Explanation: This message is negative, indicating that mistakes have caused a setback.
+Answer: -0.08
+
+Example 56:
+Message: “Нам нужно что-то кардинально менять.”
+Explanation: This message is negative, indicating the need for significant change.
+Answer: -0.10
+
+Example 57:
+Message: “Это худшее исполнение, которое я видел.”
+Explanation: This message is highly negative, indicating the worst execution ever witnessed.
+Answer: -0.12
+
+Example 58:
+Message: “Ваше поведение неприемлемо.”
+Explanation: This message is highly negative, criticizing someone's behavior.
+Answer: -0.14
+
+Example 59:
+Message: “Это серьезное нарушение наших стандартов.”
+Explanation: This message is highly negative, indicating a serious breach of standards.
+Answer: -0.16
+
+Example 60:
+Message: “Я не знаю, что еще делать с вашими ошибками.”
+Explanation: This message is highly negative, indicating frustration with repeated mistakes.
+Answer: -0.18
+
+Example 61:
+Message: “Ваши результаты разочаровывают меня снова и снова.”
+Explanation: This message is highly negative, expressing continuous disappointment with results.
+Answer: -0.20
+
+Example 62:
+Message: “Сколько еще раз нам придется это исправлять?”
+Explanation: This message is highly negative, expressing frustration with repeated corrections.
+Answer: -0.22
+
+Example 63:
+Message: “Вы действительно подводите всю команду.”
+Explanation: This message is highly negative, indicating that someone's actions are letting down the entire team.
+Answer: -0.24
+
+Example 64:
+Message: “У нас нет времени на исправление ваших ошибок.”
+Explanation: This message is highly negative, indicating that there is no time to correct someone's mistakes.
+Answer: -0.26
+
+Example 65:
+Message: “Ваш подход к работе вызывает сомнения.”
+Explanation: This message is highly negative, indicating that someone's work approach is questionable.
+Answer: -0.28
+
+Example 66:
+Message: “Мы уже обсуждали эти ошибки, но они продолжаются.”
+Explanation: This message is highly negative, indicating that errors continue despite prior discussions.
+Answer: -0.30
+
+Example 67:
+Message: “Это стало систематической проблемой.”
+Explanation: This message is highly negative, indicating that an issue has become systematic.
+Answer: -0.32
+
+Example 68:
+Message: “Ваши ошибки повторяются слишком часто.”
+Explanation: This message is highly negative, indicating that mistakes are occurring too frequently.
+Answer: -0.34
+
+Example 69:
+Message: “Это больше не может продолжаться.”
+Explanation: This message is highly negative, indicating that the current situation cannot continue.
+Answer: -0.36
+
+Example 70:
+Message: “Я больше не уверен в ваших способностях.”
+Explanation: This message is highly negative, expressing doubt in someone's abilities.
+Answer: -0.38
+
+Example 71:
+Message: “Мы тратим слишком много времени на вашу некомпетентность.”
+Explanation: This message is highly negative, indicating that too much time is being spent dealing with incompetence.
+Answer: -0.40
+
+Example 72:
+Message: “Это непрофессионально.”
+Explanation: This message is highly negative, indicating unprofessional behavior.
+Answer: -0.42
+
+Example 73:
+Message: “Ваш подход ведет нас к провалу.”
+Explanation: This message is highly negative, indicating that someone's approach is leading to failure.
+Answer: -0.44
+
+Example 74:
+Message: “Я не вижу прогресса в ваших результатах.”
+Explanation: This message is highly negative, indicating a lack of progress in results.
+Answer: -0.46
+
+Example 75:
+Message: “Ваша работа не соответствует нашим стандартам.”
+Explanation: This message is highly negative, indicating that work does not meet the expected standards.
+Answer: -0.48
+
+Example 76:
+Message: “Ваше участие в проекте вызывает больше проблем, чем пользы.”
+Explanation: This message is highly negative, indicating that someone's participation is causing more problems than benefits.
+Answer: -0.50
+
+Example 77:
+Message: “Ваши ошибки стоят нам времени и денег.”
+Explanation: This message is highly negative, indicating that mistakes are costing time and money.
+Answer: -0.52
+
+Example 78:
+Message: “Это поведение абсолютно неприемлемо.”
+Explanation: This message is highly negative, indicating that behavior is absolutely unacceptable.
+Answer: -0.54
+
+Example 79:
+Message: “Вы не принимаете критику и не учитесь на ошибках.”
+Explanation: This message is highly negative, indicating that someone is not accepting criticism or learning from mistakes.
+Answer: -0.56
+
+Example 80:
+Message: “Вы ставите под угрозу успех всего проекта.”
+Explanation: This message is highly negative, indicating that someone's actions are jeopardizing the success of the entire project.
+Answer: -0.58
+
+Example 81:
+Message: “Ваши действия говорят о полном отсутствии понимания задач.”
+Explanation: This message is highly negative, indicating a complete lack of understanding of the tasks.
+Answer: -0.60
+
+Example 82:
+Message: “Мы вынуждены рассмотреть ваше увольнение.”
+Explanation: This message is highly negative, indicating that termination is being considered.
+Answer: -0.62
+
+Example 83:
+Message: “Мы больше не можем доверять вам выполнение задач.”
+Explanation: This message is highly negative, indicating a loss of trust in someone's ability to complete tasks.
+Answer: -0.64
+
+Example 84:
+Message: “Ваши ошибки повторяются, несмотря на все предупреждения.”
+Explanation: This message is highly negative, indicating that mistakes are continuing despite warnings.
+Answer: -0.66
+
+Example 85:
+Message: “Ваш подход подрывает моральный дух команды.”
+Explanation: This message is highly negative, indicating that someone's approach is undermining team morale.
+Answer: -0.68
+
+Example 86:
+Message: “Ваша работа не только неэффективна, но и вредит проекту.”
+Explanation: This message is highly negative, indicating that work is not only ineffective but also harmful to the project.
+Answer: -0.70
+
+Example 87:
+Message: “Кажется, вы не понимаете своих обязанностей.”
+Explanation: This message is highly negative, indicating that someone does not understand their responsibilities.
+Answer: -0.72
+
+Example 88:
+Message: “Мы больше не можем позволить себе такие ошибки.”
+Explanation: This message is highly negative, indicating that such mistakes can no longer be tolerated.
+Answer: -0.74
+
+Example 89:
+Message: “Ваши решения выглядят бессмысленными.”
+Explanation: This message is highly negative, indicating that decisions appear to be senseless.
+Answer: -0.76
+
+Example 90:
+Message: “Вы демонстрируете полное отсутствие компетенции.”
+Explanation: This message is highly negative, indicating a complete lack of competence.
+Answer: -0.78
+
+Example 91:
+Message: “Вы препятствуете прогрессу команды.”
+Explanation: This message is highly negative, indicating that someone is hindering the progress of the team.
+Answer: -0.80
+
+Example 92:
+Message: “Ваша работа вызывает только разочарование.”
+Explanation: This message is highly negative, indicating that work only causes disappointment.
+Answer: -0.82
+
+Example 93:
+Message: “Мы не видим смысла в вашем дальнейшем участии.”
+Explanation: This message is highly negative, indicating that further participation is deemed pointless.
+Answer: -0.84
+
+Example 94:
+Message: “Ваши действия показывают полное отсутствие ответственности.”
+Explanation: This message is highly negative, indicating a complete lack of responsibility.
+Answer: -0.86
+
+Example 95:
+Message: “Ваше присутствие вредит нашей работе.”
+Explanation: This message is highly negative, indicating that someone's presence is detrimental to work.
+Answer: -0.88
+
+Example 96:
+Message: “Вы больше мешаете, чем помогаете.”
+Explanation: This message is highly negative, indicating that someone is more of a hindrance than a help.
+Answer: -0.90
+
+Example 97:
+Message: “Это худший результат, который мы могли ожидать.”
+Explanation: This message is highly negative, indicating that it is the worst result expected.
+Answer: -0.92
+
+Example 98:
+Message: “Вы совершенно неподходящий человек для этой работы.”
+Explanation: This message is highly negative, indicating that someone is completely unsuitable for the job.
+Answer: -0.94
+
+Example 99:
+Message: “Выходите из команды немедленно.”
+Explanation: This message is highly negative, instructing someone to leave the team immediately.
+Answer: -0.96
+
+Example 100:
+Message: “Нам пришлось уволить вас из-за последних провалов.”
+Explanation: This message is highly negative, indicating that someone was fired due to recent failures.
+Answer: -0.98
+
+Example 101:
+Message: “Мы больше не можем терпеть ваши ошибки.”
+Explanation: This message is highly negative, indicating that mistakes can no longer be tolerated.
+Answer: -1.00
+
+
+Sentiment Levels:
+Highly Positive.
+Positive.
+Mildly Positive
+Neutral.
+Mildly Negative.
+Negative.
+Highly Negative.
+
+Insultiveness Levels:
+Not Insultive: The message contains no insults.
+Potentially Insultive: The message may be perceived as slightly insulting, depending on context.
+Insultive: The message contains clear insults or demeaning language.
+
+Reply with the sentiment score, sentiment level, and insultiveness status. 
+Reply in this order: sentiment score, sentiment level, insultiveness status. Make comma separated.
+Do not reply with any other text.

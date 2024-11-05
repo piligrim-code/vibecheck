@@ -1,0 +1,26 @@
+CREATE OR REPLACE FUNCTION count_vibe()
+RETURNS TRIGGER AS $$
+DECLARE
+    c_id text;
+    time TIMESTAMP;
+    v NUMERIC;
+BEGIN
+    -- Проходимся по каждой строке результирующего запроса
+    FOR c_id, time, v IN
+    	SELECT chat_id, MAX(timestamp) AS time,
+            ROUND(AVG((EXP(1 - sentiment_score) - 1) / LOG(2, EXTRACT(epoch from time_differ))), 3) AS vibe
+        FROM
+            (SELECT chat_id, rank() over(PARTITION BY chat_id ORDER BY timestamp DESC) AS rank, 
+                sentiment_score, timestamp,
+                MAX(timestamp) OVER(PARTITION BY chat_id) - timestamp + '00:00:05' AS time_differ
+            FROM public.vibecheck
+            ORDER BY timestamp DESC) as t
+        WHERE rank < 11
+        GROUP BY chat_id
+    LOOP
+    	INSERT INTO vibes (chat_id, timestamp, vibe)
+    	VALUES (c_id, time, v);
+    END LOOP;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
