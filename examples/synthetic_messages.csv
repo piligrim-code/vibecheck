@@ -1,0 +1,5 @@
+message,sentiment_score
+Synthetic example: the test completed.,0.5
+Synthetic example: the task is queued.,0.0
+Synthetic example: the build failed.,-0.5
+Synthetic example: all checks passed.,1.0
